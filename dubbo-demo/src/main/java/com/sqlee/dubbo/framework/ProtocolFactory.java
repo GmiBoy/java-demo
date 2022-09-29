@@ -1,7 +1,6 @@
 package com.sqlee.dubbo.framework;
 
-import com.sqlee.dubbo.framework.protocol.http.HttpServer;
-import com.sqlee.dubbo.framework.protocol.netty.NettyServer;
+import com.sqlee.dubbo.framework.protocol.http.HttpProtocol;
 
 /**
  * @author SQLee
@@ -12,12 +11,12 @@ public class ProtocolFactory {
     
     public static Protocol getProtocolObj(String name) {
         if (name == null || name.equals("")) {
-            return new HttpServer();
+            return new HttpProtocol();
         }
         if (name.equals("http")) {
-            return new HttpServer();
+            return new HttpProtocol();
         } else {
-            return new NettyServer();
+            return null;
         }
     }
 
