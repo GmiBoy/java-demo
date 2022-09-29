@@ -13,16 +13,14 @@ import org.apache.catalina.core.StandardEngine;
 import org.apache.catalina.core.StandardHost;
 import org.apache.catalina.startup.Tomcat;
 
-import com.sqlee.dubbo.framework.Protocol;
-
 /**
  * @author SQLee
  * @createTime 2022年9月29日-15:52:00
  * @description
  */
-public class HttpServer implements Protocol {
+public class HttpServer {
 
-    @Override
+
     public void start() {
         // 启动服务器
         Tomcat tomcat = new Tomcat();
@@ -59,6 +57,6 @@ public class HttpServer implements Protocol {
         } catch (LifecycleException e) {
             e.printStackTrace();
         }
-    }
+    }    
 
 }

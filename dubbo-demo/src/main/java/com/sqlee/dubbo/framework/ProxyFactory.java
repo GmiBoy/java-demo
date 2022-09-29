@@ -1,9 +1,9 @@
 package com.sqlee.dubbo.framework;
 
-import com.sqlee.dubbo.framework.register.RemoteRegister;
-import com.sqlee.dubbo.framework.utils.HttpClientUtils;
-
 import java.lang.reflect.Proxy;
+
+import com.sqlee.dubbo.framework.invoke.Invoker;
+import com.sqlee.dubbo.framework.register.RemoteRegister;
 
 /**
  * @author lishuqi
@@ -19,9 +19,10 @@ public class ProxyFactory<T> {
                     URL url = RemoteRegister.get(clazz.getName());
                     // 构造双方协议实体
                     Invocation invocation = new Invocation(clazz.getName(), method.getName(), method.getParameterTypes(), args);
+                    Protocol protocol = ProtocolFactory.getProtocolObj(url.getProtocol());
+                    Invoker refere = protocol.refere(url);
                     // 发送请求并拿到响应结果
-                    String result = HttpClientUtils.send(url.getHost(), url.getPort(), invocation);
-                    return result;
+                    return refere.invoke(invocation);
                 });
     }
 }
